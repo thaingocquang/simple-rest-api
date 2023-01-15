@@ -24,7 +24,10 @@ func main() {
 	restaurants := e.Group("/restaurants")
 
 	restaurants.POST("", echorestaurant.CreateRestaurant(appCtx))
+	restaurants.GET("/:id", echorestaurant.GetRestaurant(appCtx))
 	restaurants.GET("", echorestaurant.ListRestaurant(appCtx))
+	restaurants.GET("/:id", echorestaurant.UpdateRestaurant(appCtx))
+	restaurants.GET("/:id", echorestaurant.DeleteRestaurant(appCtx))
 
 	e.Logger.Fatal(e.Start(":1323"))
 }

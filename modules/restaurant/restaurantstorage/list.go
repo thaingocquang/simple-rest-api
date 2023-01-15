@@ -21,7 +21,7 @@ func (s *sqlStore) ListDataByCondition(
 		db = db.Preload(moreKeys[i])
 	}
 
-	db = db.Table(restaurantmodel.Restaurant{}.TableName()).Where(condition)
+	db = db.Table(restaurantmodel.Restaurant{}.TableName()).Where(condition).Where("status in (1)")
 
 	if filter != nil {
 		if filter.CityID > 0 {

@@ -2,13 +2,14 @@ package restaurantmodel
 
 import (
 	"errors"
+	"simple-rest-api/common"
 	"strings"
 )
 
 type Restaurant struct {
-	ID      int    `gorm:"column:id"`
-	Name    string `gorm:"column:name"`
-	Address string `gorm:"column:addr"`
+	common.SQLModel `json:",inline"`
+	Name            string `gorm:"column:name"`
+	Address         string `gorm:"column:addr"`
 }
 
 func (Restaurant) TableName() string {
@@ -19,6 +20,15 @@ type RestaurantCreate struct {
 	ID      int    `json:"id" gorm:"column:id"`
 	Name    string `json:"name" gorm:"column:name"`
 	Address string `json:"address" gorm:"column:addr"`
+}
+
+type RestaurantUpdate struct {
+	Name    string `json:"name" gorm:"column:name"`
+	Address string `json:"address" gorm:"column:addr"`
+}
+
+func (RestaurantUpdate) TableName() string {
+	return Restaurant{}.TableName()
 }
 
 func (rc RestaurantCreate) Validate() error {
@@ -32,5 +42,5 @@ func (rc RestaurantCreate) Validate() error {
 }
 
 func (RestaurantCreate) TableName() string {
-	return "restaurants"
+	return Restaurant{}.TableName()
 }

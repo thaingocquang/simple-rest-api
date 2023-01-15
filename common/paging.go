@@ -1,8 +1,8 @@
 package common
 
 type Paging struct {
-	Page  int   `json:"page" form:"page"`
-	Limit int   `json:"limit" form:"limit"`
+	Page  int   `json:"page" form:"page" query:"page"`
+	Limit int   `json:"limit" form:"limit" query:"limit"`
 	Total int64 `json:"total" form:"total"`
 }
 

@@ -3,6 +3,7 @@ package restaurantbusiness
 import (
 	"context"
 	"errors"
+	"simple-rest-api/common"
 	"simple-rest-api/modules/restaurant/restaurantmodel"
 )
 
@@ -29,6 +30,9 @@ func (business *getRestaurantBusiness) GetRestaurant(
 	data, err := business.store.FindDataByCondition(ctx, map[string]interface{}{"id": id})
 
 	if err != nil {
+		if err == common.RecordNotFound {
+			return nil, err
+		}
 		return nil, err
 	}
 
